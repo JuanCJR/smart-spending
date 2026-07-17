@@ -1,0 +1,21 @@
+# Dependencias
+**/node_modules/
+
+# Builds / salidas
+**/build/
+**/dist/
+**/.react-router/
+**/coverage/
+
+# Entorno
+**/.env
+**/.env.*
+!**/.env.example
+
+# Playwright
+**/playwright-report/
+**/test-results/
+
+# Logs / OS
+**/*.log
+.DS_Store

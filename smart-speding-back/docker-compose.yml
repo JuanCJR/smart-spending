@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: smart-spending-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: smart_spending
+      POSTGRES_PASSWORD: smart_spending
+      POSTGRES_DB: smart_spending
+    ports:
+      - '5432:5432'
+    volumes:
+      - smart-spending-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U smart_spending -d smart_spending']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  smart-spending-db-data:
