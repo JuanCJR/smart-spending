@@ -1,15 +1,264 @@
 @import "tailwindcss";
 
+/* =====================================================================
+   El Libro de Cuentas — Design Tokens "paper-ledger" (Tailwind CSS v4)
+   Papel crema cálido + tinta café · acentos terracota/oliva/arcilla/oro
+   Light por defecto (:root) · Dark bajo [data-theme="dark"] (attribute)
+   ===================================================================== */
+
+:root {
+  /* ── PALETTE CRUDA ──────────────────────────────────────────────── */
+  --paper-50: #fbf6ea;
+  --paper-100: #f5eddb;
+  --paper-200: #f1e8d6;
+  --paper-300: #eadfc6;
+  --paper-400: #e3d5ba;
+
+  --ink-900: #3b3024;
+  --ink-700: #5b4f3e;
+  --ink-500: #7a6a52;
+
+  --terracotta: #c2664a;
+  --terracotta-dark: #a9542f;
+  --olive: #5f7a45;
+  --olive-light: #a8c07e;
+  --clay: #b5532f;
+  --clay-light: #e59a7c;
+  --gold: #d9a441;
+
+  /* tintas de categoría */
+  --cat-sueldo: #6e7a4b;
+  --cat-freelance: #7e8b57;
+  --cat-inversiones: #9aa06b;
+  --cat-arriendo: #c2664a;
+  --cat-super: #b5532f;
+  --cat-comida: #c8922f;
+  --cat-servicios: #8a6d3b;
+  --cat-otros: #8a7657;
+
+  /* ── SEMÁNTICOS LIGHT ───────────────────────────────────────────── */
+  --surface-page: var(--paper-200);
+  --surface-card: var(--paper-50);
+  --surface-hover: var(--paper-100);
+  --surface-sunken: rgba(59, 48, 36, 0.06);
+  --surface-invert: var(--ink-900);
+  --on-invert: var(--paper-200);
+
+  --border-hairline: var(--paper-400);
+  --border-rule: rgba(59, 48, 36, 0.2);
+  --border-faint: rgba(59, 48, 36, 0.1);
+  --border-field: rgba(59, 48, 36, 0.28);
+  --margin-line: rgba(194, 102, 74, 0.3);
+
+  --text-strong: var(--ink-900);
+  --text-body: rgba(59, 48, 36, 0.72);
+  --text-muted: rgba(59, 48, 36, 0.5);
+  --text-faint: rgba(59, 48, 36, 0.42);
+
+  --accent: var(--terracotta);
+  --accent-hover: var(--terracotta-dark);
+  --on-accent: var(--paper-50);
+  --income: var(--olive);
+  --expense: var(--clay);
+  --selection: rgba(194, 102, 74, 0.25);
+
+  /* ── TIPOGRAFÍA ─────────────────────────────────────────────────── */
+  /* --font-display / --font-body se definen en @theme (abajo) para
+     generar utilidades y quedan disponibles como var() aquí. */
+  --fs-eyebrow: 12px;
+  --fs-caption: 13px;
+  --fs-small: 14px;
+  --fs-base: 16px;
+  --fs-lead: 19px;
+  --fs-h4: 20px;
+  --fs-h3: 27px;
+  --fs-h2: 34px;
+  --fs-h1: 48px;
+  --fs-display: 72px;
+
+  --lh-tight: 1.02;
+  --lh-snug: 1.3;
+  --lh-body: 1.6;
+  --tracking-eyebrow: 0.2em;
+  --tracking-tight: -0.025em;
+
+  /* ── ESPACIADO ──────────────────────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 22px;
+  --space-6: 26px;
+  --space-7: 34px;
+  --space-8: 44px;
+  --space-9: 56px;
+  --space-10: 72px;
+  --gutter: clamp(18px, 3.5vw, 28px);
+  --measure: 1120px;
+  --sidebar-w: 248px;
+
+  /* ── EFECTOS ────────────────────────────────────────────────────── */
+  --radius-sm: 8px;
+  --radius: 10px;
+  --radius-lg: 13px;
+  --radius-xl: 14px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 8px 26px rgba(59, 48, 36, 0.07);
+  --shadow-float: 0 18px 44px rgba(59, 48, 36, 0.14);
+  --shadow-cta: 0 4px 14px rgba(194, 102, 74, 0.3);
+  --shadow-tab: 0 4px 14px rgba(59, 48, 36, 0.1);
+  --shadow-inset-active: 0 2px 6px rgba(59, 48, 36, 0.12);
+  --tape-rotate: -1.5deg;
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --dur: 0.2s;
+}
+
+/* ── SEMÁNTICOS DARK ──────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --surface-page: #221c15;
+  --surface-card: #2e2720;
+  --surface-hover: #383025;
+  --surface-sunken: rgba(239, 230, 211, 0.07);
+  --surface-invert: #17120d;
+  --on-invert: #efe6d3;
+
+  --border-hairline: #453a2b;
+  --border-rule: rgba(239, 230, 211, 0.22);
+  --border-faint: rgba(239, 230, 211, 0.1);
+  --border-field: rgba(239, 230, 211, 0.3);
+  --margin-line: rgba(208, 122, 92, 0.42);
+
+  --text-strong: #efe6d3;
+  --text-body: rgba(239, 230, 211, 0.74);
+  --text-muted: rgba(239, 230, 211, 0.5);
+  --text-faint: rgba(239, 230, 211, 0.4);
+
+  --accent: #d07a5c;
+  --accent-hover: #e1906f;
+  --on-accent: #221c15;
+  --income: var(--olive-light);
+  --expense: var(--clay-light);
+  --selection: rgba(208, 122, 92, 0.3);
+
+  --shadow-card: 0 8px 26px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 18px 44px rgba(0, 0, 0, 0.55);
+  --shadow-cta: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* =====================================================================
+   Puente Tailwind: expone tokens clave como utilidades (font-display,
+   bg-surface-card, text-accent, text-income, etc.).
+   ===================================================================== */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+@theme inline {
+  --color-surface-page: var(--surface-page);
+  --color-surface-card: var(--surface-card);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-invert: var(--surface-invert);
+  --color-on-invert: var(--on-invert);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --color-income: var(--income);
+  --color-expense: var(--expense);
+
+  --color-text-strong: var(--text-strong);
+  --color-text-body: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+}
+
+/* =====================================================================
+   BASE / RESETS
+   ===================================================================== */
+* {
+  box-sizing: border-box;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  margin: 0;
+  padding: 0;
+  background: var(--surface-page);
+  color: var(--text-strong);
+  font-family: var(--font-body);
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
+::selection {
+  background: var(--selection);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+a:hover {
+  color: var(--accent-hover);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input {
+  font-family: inherit;
+}
+input::placeholder {
+  color: var(--text-faint);
+}
+input:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text-strong);
+}
+
+/* Montos CLP: dígitos de ancho fijo para alinear columnas. */
+.amount,
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Grain overlay: textura de papel sobre todo, sin capturar clics. */
+.lc-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='220'%20height='220'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='220'%20height='220'%20filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Animación de entrada del hero. */
+@keyframes softin {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lc-softin {
+  animation: softin 0.6s var(--ease) both;
 }

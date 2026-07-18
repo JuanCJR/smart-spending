@@ -1,9 +1,12 @@
 import { expect, test } from "@playwright/test";
 
-test("home page loads and shows the app title", async ({ page }) => {
+test("landing loads and shows the hero headline", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle(/Smart Spending/);
+  await expect(page).toHaveTitle(/El Libro de Cuentas/);
   await expect(
-    page.getByRole("heading", { name: "Smart Spending" }),
-  ).toBeAttached();
+    page.getByRole("heading", { level: 1, name: /Anota cada peso/ }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /Abrir mi libro/ }),
+  ).toBeVisible();
 });
